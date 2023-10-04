@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shop_app/models/category_model.dart';
+import 'package:flutter_shop_app/models/models.dart';
 import 'package:flutter_shop_app/screens/cart/cart_screen.dart';
 import 'package:flutter_shop_app/screens/catalog/catalog_screen.dart';
 import 'package:flutter_shop_app/screens/home/home_screen.dart';
@@ -28,7 +29,8 @@ class AppRouter
             categoryModel:settings.arguments as CategoryModel
         );
       case ProductScreen.routeName:
-        return ProductScreen.route();
+        return ProductScreen.
+          route(productModel: settings.arguments as ProductModel);
       case WishListScreen.routeName:
         return WishListScreen.route();
 

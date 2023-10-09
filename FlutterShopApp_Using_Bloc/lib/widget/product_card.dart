@@ -9,10 +9,12 @@ class ProductCard extends StatelessWidget
 {
   final ProductModel productModel;
   final double widthFactor;
+  final bool isWishList;
 
   const ProductCard({
     required this.productModel,
     this.widthFactor=2.5,
+    this.isWishList=false
 
   });
 
@@ -35,8 +37,9 @@ class ProductCard extends StatelessWidget
           Positioned(
             top: 60,
             left: 5,
+            right: 5,
             child: Container(
-              width:MediaQuery.of(context).size.width/2.5,
+              width:MediaQuery.of(context).size.width,///2.5,
               height: 80,
               decoration: BoxDecoration(color: Colors.black.withAlpha(50)),
             ),
@@ -44,8 +47,9 @@ class ProductCard extends StatelessWidget
           Positioned(
             top: 60,
             left: 5,
+            right: 5,
             child: Container(
-              width:MediaQuery.of(context).size.width/2.5,
+              width:MediaQuery.of(context).size.width,///2.5,
               height: 80,
               decoration: BoxDecoration(color: Colors.black.withAlpha(50)),
             ),
@@ -53,8 +57,9 @@ class ProductCard extends StatelessWidget
           Positioned(
             top: 65,
             left: 5,
+            right: 5,
             child: Container(
-              width:MediaQuery.of(context).size.width/2.5-10,
+              width:MediaQuery.of(context).size.width-10,///2.5-10,
               height: 70,
               decoration: BoxDecoration(color: Colors.black.withAlpha(50)),
               child: Padding(
@@ -87,7 +92,13 @@ class ProductCard extends StatelessWidget
                           },
                           icon: Icon(Icons.add_circle,color: Colors.white,)
                       ),
-                    )
+                    ),
+                    isWishList ? Expanded(
+                      child: IconButton(
+                        icon: Icon(Icons.delete,color: Colors.white,),
+                        onPressed: (){},
+                      ),
+                    ):SizedBox()
                   ],
                 ),
               ),

@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_shop_app/models/cart_model.dart';
 import 'package:flutter_shop_app/models/models.dart';
 import '../../widget/cart_product_card.dart';
 import '../../widget/custom_appbar.dart';
-import '../../widget/custom_navbar.dart';
 
 class CartScreen extends StatelessWidget
 {
@@ -52,7 +52,7 @@ class CartScreen extends StatelessWidget
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Add \$20.0 for FREE Delivery',
+                        CartModel().freeDeliveryString,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       ElevatedButton(
@@ -73,8 +73,15 @@ class CartScreen extends StatelessWidget
                     ],
                   ),
                   SizedBox(height: 10,),
-                  CartProductCard(productModel: ProductModel.products[0],),
-                  CartProductCard(productModel: ProductModel.products[2],),
+                  SizedBox(
+                    height: 450,
+                    child: ListView.builder(
+                        itemCount: CartModel().products.length,
+                        itemBuilder:(context,index){
+                          return CartProductCard(productModel: ProductModel.products[index],);
+                       }),
+                  ),
+
                 ],
               ),
 
@@ -89,7 +96,7 @@ class CartScreen extends StatelessWidget
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('SUBTOTAL',style: Theme.of(context).textTheme.headline5,),
-                            Text('\$5.98',style: Theme.of(context).textTheme.headline5,)
+                            Text('\$'+CartModel().subtotalString,style: Theme.of(context).textTheme.headline5,)
                           ],
                         ),
                         SizedBox(height: 10,),
@@ -97,7 +104,7 @@ class CartScreen extends StatelessWidget
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Delivery Fee',style: Theme.of(context).textTheme.headline5,),
-                            Text('\$2.65',style: Theme.of(context).textTheme.headline5,)
+                            Text('\$'+CartModel().deliveryFeeString,style: Theme.of(context).textTheme.headline5,)
                           ],
                         ),
 
@@ -125,7 +132,7 @@ class CartScreen extends StatelessWidget
                               Text('Total',
                                 style: Theme.of(context).
                                 textTheme.headline5?.copyWith(color: Colors.white),),
-                              Text('\$22.65',style: Theme.of(context).textTheme.headline5
+                              Text('\$'+CartModel().totalString,style: Theme.of(context).textTheme.headline5
                                   ?.copyWith(color: Colors.white) ,)
                             ],
                           ),

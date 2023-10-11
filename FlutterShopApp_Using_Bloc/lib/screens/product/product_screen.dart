@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shop_app/blocs/cart/cart_bloc.dart';
 import 'package:flutter_shop_app/blocs/wishlist/wishlist_bloc.dart';
 import 'package:flutter_shop_app/models/models.dart';
 import 'package:flutter_shop_app/widget/hero_carousel_card.dart';
@@ -46,14 +47,21 @@ class ProductScreen extends StatelessWidget
                         icon: Icon(Icons.favorite,color: Colors.white,)
                     );
                   }),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.white),
-                  onPressed:(){},
-                  child:Text(
-                    'ADD TO CART',
-                    style: Theme.of(context).
-                    textTheme.headline3,
-                  ))
+                BlocBuilder<CartBloc,CartState>(
+                  builder: (context,state) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.white),
+                      onPressed:(){
+                        context.read<CartBloc>().add(CartProductAdded(productModel));
+                        Navigator.pushNamed(context, '/cart');
+                      },
+                      child:Text(
+                        'ADD TO CART',
+                        style: Theme.of(context).
+                        textTheme.headline3,
+                      ));
+                  }
+                )
               ],
             ),
           ),

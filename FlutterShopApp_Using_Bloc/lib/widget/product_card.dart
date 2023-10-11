@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shop_app/blocs/cart/cart_bloc.dart';
 
 import '../models/product_model.dart';
 
@@ -85,13 +87,30 @@ class ProductCard extends StatelessWidget
                         ],
                       ),
                     ),
-                    Expanded(
-                      child: IconButton(
-                          onPressed: (){
+                    
+                    BlocBuilder<CartBloc,CartState>(
+                      builder: (context,state)
+                      {
+                        if(state is CartLoading) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if(state is CartLoaded)
+                        {
+                          return Expanded(
+                            child: IconButton(
+                            onPressed: () {
+                              context.read<CartBloc>()
+                                  .add(CartProductAdded(productModel));
+                            },
+                            icon: Icon(Icons.add_circle, color: Colors.white,)),
+                          );
+                        }else{
+                          return Text('Something Went Wrong');
+                        }
 
-                          },
-                          icon: Icon(Icons.add_circle,color: Colors.white,)
-                      ),
+                      },
                     ),
                     isWishList ? Expanded(
                       child: IconButton(

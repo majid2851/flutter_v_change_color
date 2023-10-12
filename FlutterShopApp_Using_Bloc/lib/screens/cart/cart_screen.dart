@@ -6,7 +6,8 @@ import '../../blocs/cart/cart_bloc.dart';
 import '../../widget/cart_product_card.dart';
 import '../../widget/custom_appbar.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatelessWidget
+{
   static const String routeName = '/cart';
   static Route route() {
     return MaterialPageRoute(
@@ -82,13 +83,24 @@ class CartScreen extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
+
                         SizedBox(
                           height: 450,
                           child: ListView.builder(
-                              itemCount:state.cartModel.products.length,
+                              itemCount:state
+                                      .cartModel
+                                      .productQuantity(state.cartModel.products)
+                                      .keys
+                                      .length,
                               itemBuilder: (context, index) {
                                 return CartProductCard(
-                                  productModel: state.cartModel.products[index],
+                                  productModel:state.cartModel.
+                                    productQuantity(state.cartModel.products)
+                                    .keys.elementAt(index),
+                                  quantity:state.cartModel
+                                    .productQuantity(state.cartModel.products)
+                                    .values
+                                    .elementAt(index)
                                 );
                               }),
                         ),

@@ -9,6 +9,8 @@ import 'package:flutter_shop_app/screens/home/home_screen.dart';
 import 'package:flutter_shop_app/screens/product/product_screen.dart';
 import 'package:flutter_shop_app/screens/screens.dart';
 
+import '../screens/splash/splash_screen.dart';
+
 class AppRouter
 {
   static Route onGenerateRoute(RouteSettings settings)
@@ -22,15 +24,22 @@ class AppRouter
 
       case HomeScreen.routeName:
         return HomeScreen.route();
+
       case CartScreen.routeName:
         return CartScreen.route();
+
+      case SplashScreen.routeName:
+        return SplashScreen.route();
+
       case CatalogScreen.routeName:
         return CatalogScreen.route(
             categoryModel:settings.arguments as CategoryModel
         );
+
       case ProductScreen.routeName:
         return ProductScreen.
           route(productModel: settings.arguments as ProductModel);
+
       case WishListScreen.routeName:
         return WishListScreen.route();
 

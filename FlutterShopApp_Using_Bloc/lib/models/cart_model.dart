@@ -11,6 +11,20 @@ class CartModel extends Equatable
 
   double get subtotal =>products.fold(0, (total,current) => total+current.price);
 
+  Map productQuantity(products)
+  {
+    var quantity = Map();
+
+    products.forEach((products){
+      if(!quantity.containsKey(products)){
+        quantity[products] =1;
+      }else{
+        quantity[products]+=1;
+      }
+    });
+
+    return quantity;
+  }
 
   double deliveryFee(subtoatl)
   {
